@@ -1,31 +1,44 @@
 function sortear(){
-    function pegaValor(idElemento){
+    function pegaConteudo(idElemento){
         return parseInt(document.getElementById(idElemento).value);
     }
 
-    let quantidade = pegaValor("quantidade");
-    let min = pegaValor("de");
-    let max = pegaValor("ate");
+    let quantidade = pegaConteudo("quantidade");
+    let min = pegaConteudo("de");
+    let max = pegaConteudo("ate");
 
-    let listaNumeroSecreto = [];
+    let listaNumeroAleatorio = [];
     let numero;
-    while(listaNumeroSecreto.length < quantidade){
-        numero = gerarNumeroAleatorio(min, max);
-        listaNumeroSecreto.push(numero);
+
+    if(quantidade > max - min + 1){
+        alert("A quantidade de números solicitada excede a faixa possível. Por favor, ajuste os valores ou a quantiade.")
+        limpaCampo("quantidade");
+        limpaCampo("de");
+        limpaCampo("ate");
+        return;
     }
 
-    let respostaUsuario = document.getElementById("mensagem_usuario");
-    respostaUsuario.textContent = `${listaNumeroSecreto}`;
+    while(listaNumeroAleatorio.length < quantidade){
+        numero = geraNumeroAleatorio(min, max);
+        listaNumeroAleatorio.push(numero);
 
-    function limpaCampo(idElemento){
-        let conteudoElemento = document.getElementById(idElemento);
-        conteudoElemento.value = "";
+        while(listaNumeroAleatorio.includes(numero)){
+            numero = geraNumeroAleatorio(min,max);
+        }
+    }
+
+    function limpaCampo(id){
+        return document.getElementById(id).value = "";
     }
     limpaCampo("quantidade");
     limpaCampo("de");
     limpaCampo("ate");
+
+    let respostaUsuario = document.getElementById("mensagem_usuario");
+    respostaUsuario.textContent = listaNumeroAleatorio;
+
 }
 
-function gerarNumeroAleatorio(min, max){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function geraNumeroAleatorio(min, max){
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
