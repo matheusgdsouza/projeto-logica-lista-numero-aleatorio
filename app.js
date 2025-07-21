@@ -20,11 +20,12 @@ function sortear(){
 
     while(listaNumeroAleatorio.length < quantidade){
         numero = geraNumeroAleatorio(min, max);
-        listaNumeroAleatorio.push(numero);
-
+        
         while(listaNumeroAleatorio.includes(numero)){
             numero = geraNumeroAleatorio(min,max);
         }
+        
+        listaNumeroAleatorio.push(numero);
     }
 
     function limpaCampo(id){
@@ -35,7 +36,7 @@ function sortear(){
     limpaCampo("ate");
 
     let respostaUsuario = document.getElementById("mensagem_usuario");
-    respostaUsuario.textContent = listaNumeroAleatorio;
+    respostaUsuario.textContent = `A lista dos números sorteados é: ${listaNumeroAleatorio}`;
 
 }
 
