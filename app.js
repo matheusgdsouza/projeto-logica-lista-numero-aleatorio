@@ -28,6 +28,34 @@ function sortear(){
         listaNumeroAleatorio.push(numero);
     }
 
+    let respostaUsuario = document.getElementById("mensagem_usuario");
+    respostaUsuario.textContent = `A lista dos números sorteados é: ${listaNumeroAleatorio}`;
+
+    habilitaBotao();            
+}
+
+reiniciar();
+
+function geraNumeroAleatorio(min, max){
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function habilitaBotao(){
+    let botaoReiniciar = document.getElementById("btn-reiniciar");
+    
+    botaoReiniciar.classList.remove("container__botao-desabilitado");
+    botaoReiniciar.classList.add("container__botao");             
+}
+
+function desabilitaBotao(){
+    let botaoReiniciar = document.getElementById("btn-reiniciar");
+
+    botaoReiniciar.classList.remove("container__botao");
+    botaoReiniciar.classList.add("container__botao-desabilitado");
+}
+
+
+function reiniciar(){
     function limpaCampo(id){
         return document.getElementById(id).value = "";
     }
@@ -35,11 +63,7 @@ function sortear(){
     limpaCampo("de");
     limpaCampo("ate");
 
-    let respostaUsuario = document.getElementById("mensagem_usuario");
-    respostaUsuario.textContent = `A lista dos números sorteados é: ${listaNumeroAleatorio}`;
+    document.getElementById("mensagem_usuario").textContent = "Nenhum número sorteado até agora.";
 
-}
-
-function geraNumeroAleatorio(min, max){
-    return Math.floor(Math.random() * (max - min + 1) + min);
+    desabilitaBotao();
 }
