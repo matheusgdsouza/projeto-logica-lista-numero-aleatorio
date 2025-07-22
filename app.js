@@ -136,6 +136,14 @@ function sortear(){
     let min = pegaConteudo("de");
     let max = pegaConteudo("ate");
 
+    if(quantidade > max - min + 1){
+        alert("A quantidade de números solicitada excede a faixa possível. Por favor, ajuste os valores ou a quantiade.")
+        limpaCampo("quantidade");
+        limpaCampo("de");
+        limpaCampo("ate");
+        return;
+    }
+
     let listaNumeroAleatorio = [];
     let numero;
 
@@ -167,10 +175,11 @@ function desativaBotao(){
     botaoReiniciar.classList.add("container__botao-desabilitado");
 }
 
+function limpaCampo(id){
+    return document.getElementById(id).value = "";
+}    
+
 function reiniciar(){
-    function limpaCampo(id){
-        return document.getElementById(id).value = "";
-    }
     limpaCampo("quantidade");
     limpaCampo("de");
     limpaCampo("ate");
